@@ -1,0 +1,5 @@
+
+include 'echo-service-api'
+include 'echo-service-server'
+
+rootProject.name = 'echo-service'

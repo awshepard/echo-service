@@ -1,0 +1,24 @@
+apply plugin: 'application'
+apply plugin: 'nebula.ospackage-application-daemon'
+
+ospackage {
+    os = 'LINUX' // only applied to RPM
+    user = 'upsideservice'
+    group = 'upsideservice'
+}
+
+applicationdaemon {
+    user = "upsideservice"
+}
+
+dependencies {
+    compile project(':echo-service-api')
+    compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile group: 'com.upside.upside-dropwizard', name: 'upside-dropwizard', version: '0.2.0-SNAPSHOT'
+}
+
+mainClassName = "com.upside.echo.EchoApplication"
+
+run {
+    args 'server', "$projectDir/src/main/resources/app_config.yml"
+}
