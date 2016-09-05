@@ -13,6 +13,7 @@ ospackage {
 applicationdaemon {
     user = "upsideservice"
     command = '/opt/upside/bin/start-upside-service echo-service-server 1.0.0'
+    autoStart = true
 }
 
 dependencies {
