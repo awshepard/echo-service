@@ -7,8 +7,9 @@
  * user guide available at https://docs.gradle.org/3.0/userguide/tutorial_java_projects.html
  */
 
+
+apply from: 'upside-service.gradle'
 project(':echo-service-server') {
     mainClassName='com.upside.echo.EchoApplication'
 }
-apply from: 'upside-service.gradle'
 
