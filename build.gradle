@@ -8,7 +8,7 @@
  */
 
 
-apply from: 'upside-service.gradle'
+apply from: '../upside-service.gradle'
 project(':echo-service-server') {
     mainClassName='com.upside.echo.EchoApplication'
 }
