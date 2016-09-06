@@ -7,46 +7,4 @@
  * user guide available at https://docs.gradle.org/3.0/userguide/tutorial_java_projects.html
  */
 
-// Apply the java plugin to add support for Java
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.netflix.nebula:gradle-ospackage-plugin:4.0.0'
-    }
-}
-
-subprojects {
-    def maven_user = System.getenv('UPSIDE_MAVEN_USER')
-    def maven_user_api_key = System.getenv('UPSIDE_MAVEN_API_KEY')
-
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            credentials {
-                username = maven_user
-                password = maven_user_api_key
-            }
-            url 'https://upside.artifactoryonline.com/upside/libs-snapshot/'
-        }
-        maven {
-            credentials {
-                username = maven_user
-                password = maven_user_api_key
-            }
-            url 'https://upside.artifactoryonline.com/upside/libs-release/'
-        }
-    }
-    ext {
-        dropwizardVersion = "1.0.0"
-    }
-    repositories {
-        mavenCentral()
-    }
-    apply plugin: 'java'
-    dependencies {
-        compile group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: '2.0.1'
-    }
-}
+apply from: 'upside-service.gradle'
