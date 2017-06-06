@@ -1,5 +1,6 @@
-
-include 'echo-service-api'
-include 'echo-service-server'
-
 rootProject.name = 'echo-service'
+include ':echo-service-api'
+include ':echo-service-server'
+
+project(':echo-service-api').projectDir = "$rootDir/echo-service-api" as File
+project(':echo-service-server').projectDir = "$rootDir/echo-service-server" as File

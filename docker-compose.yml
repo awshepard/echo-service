@@ -1,0 +1,10 @@
+echo-service:
+    build: .
+    ports: 
+        # REST service port 
+         - "6000:6000"
+        # Dropwizard administration port
+         - "6001:6001"
+
+
+

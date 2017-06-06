@@ -1,0 +1,19 @@
+description = 'echo-service-server'
+mainClassName = 'com.upside.echo.EchoApplication'
+dependencies {
+    compile project(':echo-service-api')
+
+    compile group: 'io.dropwizard', name: 'dropwizard-core'
+    compile group: 'io.dropwizard', name: 'dropwizard-client'
+    compile group: 'io.dropwizard', name: 'dropwizard-configuration'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations'
+
+    compile group: 'org.slf4j', name: 'slf4j-api'
+
+    compile group: 'javax.validation', name: 'validation-api'
+    compile group: 'javax.inject', name: 'javax.inject'
+    compile group: 'javax.ws.rs', name: 'javax.ws.rs-api'
+
+}
