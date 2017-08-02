@@ -1,4 +1,5 @@
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-service.gradle'
+apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-whitesource.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-autovalue.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-jacoco.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-jacoco-multimodule.gradle'
