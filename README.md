@@ -1,5 +1,5 @@
 # echo-service
-Test bed service for example code and configuration. Has slack integration.
+Test bed service for example code and configuration. Has slack integration for testing.
 
 ## Compile
 `./gradlew clean snapshot build jacocoTestReport jacocoRootReport publishToMavenLocal`
