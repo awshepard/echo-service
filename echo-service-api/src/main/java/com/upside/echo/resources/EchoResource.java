@@ -22,4 +22,11 @@ public interface EchoResource {
     @GET
     String getHello();
 
+    /**
+     * @return says "hello" 50% of the time, throws a 500 InternalServerException the other 50% of the time
+     */
+    @Path("/fail50")
+    @GET
+    String fail50();
+
 }
