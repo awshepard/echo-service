@@ -14,10 +14,12 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface EchoResource {
+    
     @Path("/env")
     @GET
     Map<String, String> getEnv();
 
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("/hello")
     @GET
     String getHello();
@@ -25,6 +27,7 @@ public interface EchoResource {
     /**
      * @return says "hello" 50% of the time, throws a 500 InternalServerException the other 50% of the time
      */
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("/fail50")
     @GET
     String fail50();

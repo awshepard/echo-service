@@ -1,4 +1,4 @@
-description = 'runbook-service-api'
+description = 'echo-service-api'
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'

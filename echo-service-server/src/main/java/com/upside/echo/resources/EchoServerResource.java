@@ -17,7 +17,7 @@ public class EchoServerResource implements EchoResource {
 
     @Override
     public String getHello() {
-        return "good night booty";
+        return "hello";
     }
 
     @Override

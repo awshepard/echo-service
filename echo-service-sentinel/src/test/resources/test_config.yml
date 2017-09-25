@@ -1,0 +1,19 @@
+server:
+  gzip:
+    bufferSize: 8KiB
+  applicationConnectors:
+    - type: http
+      port: 6000
+  adminConnectors:
+    - type: http
+      port: 6001
+
+
+# Logging settings.
+# For full configuration options, see https://dropwizard.github.io/dropwizard/manual/configuration.html#logging
+logging:
+  level: INFO     # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  # Logger-specific levels.
+  loggers:
+    # Overrides the level of com.upside and sets it to DEBUG. (Bump up to TRACE for even more info)
+    "com.upside": TRACE
