@@ -26,29 +26,34 @@ public class JaxrsEchoClient implements EchoClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private static final int CLIENT_TIMEOUT_MS = 45000;
-    private final String baseUrl;
-    private final Client client;
+    private final WebTarget targetEnv;
+    private final WebTarget targetHello;
+    private final WebTarget targetFail50;
 
     public JaxrsEchoClient(ExecutorService executorService, String baseUrl, String username, String password) {
-        this.baseUrl = baseUrl;
-        this.client = new JerseyClientBuilder(new MetricRegistry())
+        Client client = new JerseyClientBuilder(new MetricRegistry())
                 .using(new ObjectMapper()
                     .findAndRegisterModules()
                     .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false))
+//                .using(new DefaultHttpRequestRetryHandler(6, true))
+                .using(new UpsideRequestRetryHandler(5, "echo-client"))
                 .using(executorService)
-                .build("attribute-client");
-        this.client.property(ClientProperties.CONNECT_TIMEOUT, CLIENT_TIMEOUT_MS);
-        this.client.property(ClientProperties.READ_TIMEOUT, CLIENT_TIMEOUT_MS);
-        this.client.register(new BasicAuthClientRequestFilter(username, password));
+                .build("echo-client");
+        client.property(ClientProperties.CONNECT_TIMEOUT, CLIENT_TIMEOUT_MS);
+        client.property(ClientProperties.READ_TIMEOUT, CLIENT_TIMEOUT_MS);
+        client.register(new BasicAuthClientRequestFilter(username, password));
+
+        targetEnv = client.target(String.format("%s/echo/env", baseUrl));
+        targetHello = client.target(String.format("%s/echo/hello", baseUrl));
+        targetFail50 = client.target(String.format("%s/echo/fail50", baseUrl));
     }
 
     @Override
     public Map<String, String> getEnv() {
-        WebTarget target = this.client.target(String.format("%s/echo/env", this.baseUrl));
-        LOGGER.debug("Getting service from endpoint '{}'", target.getUri());
+        LOGGER.debug("Getting service from endpoint '{}'", targetEnv.getUri());
 
-        Response response = target.request(MediaType.APPLICATION_JSON).get();
+        Response response = targetEnv.request(MediaType.APPLICATION_JSON).get();
 
         LOGGER.debug("Got response '{}'", response.getStatus());
         checkState(response.getStatus() == Response.Status.OK.getStatusCode(),
@@ -59,10 +64,9 @@ public class JaxrsEchoClient implements EchoClient {
 
     @Override
     public String getHello() {
-        WebTarget target = this.client.target(String.format("%s/echo/hello", this.baseUrl));
-        LOGGER.debug("Getting service from endpoint '{}'", target.getUri());
+        LOGGER.debug("Getting service from endpoint '{}'", targetHello.getUri());
 
-        Response response = target.request(MediaType.TEXT_PLAIN).get();
+        Response response = targetHello.request(MediaType.TEXT_PLAIN).get();
 
         LOGGER.debug("Got response '{}'", response.getStatus());
         checkState(response.getStatus() == Response.Status.OK.getStatusCode(),
@@ -73,15 +77,22 @@ public class JaxrsEchoClient implements EchoClient {
 
     @Override
     public String fail50() {
-        WebTarget target = this.client.target(String.format("%s/echo/fail50", this.baseUrl));
-        LOGGER.debug("Getting service from endpoint '{}'", target.getUri());
+        Response response = null;
+        try {
+            LOGGER.debug("Getting service from endpoint '{}'", targetFail50.getUri());
 
-        Response response = target.request(MediaType.TEXT_PLAIN).get();
+            response = targetFail50.request(MediaType.TEXT_PLAIN).get();
 
-        LOGGER.debug("Got response '{}'", response.getStatus());
-        checkState(response.getStatus() == Response.Status.OK.getStatusCode(),
-                "Got status %s instead of 200", response.getStatus());
+            LOGGER.debug("Got response '{}'", response.getStatus());
+            checkState(response.getStatus() == Response.Status.OK.getStatusCode(),
+                    "Got status %s instead of 200", response.getStatus());
 
-        return response.readEntity(String.class);
+            return response.readEntity(String.class);
+        }
+        finally {
+            if (response != null) {
+                response.close();
+            }
+        }
     }
 }

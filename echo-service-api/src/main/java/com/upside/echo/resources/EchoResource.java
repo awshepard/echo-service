@@ -1,5 +1,6 @@
 package com.upside.echo.resources;
 
+import java.io.IOException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,7 +15,7 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface EchoResource {
-    
+
     @Path("/env")
     @GET
     Map<String, String> getEnv();
@@ -25,11 +26,12 @@ public interface EchoResource {
     String getHello();
 
     /**
-     * @return says "hello" 50% of the time, throws a 500 InternalServerException the other 50% of the time
+     * @return says "hello" 50% of the time, throws an IOException
+     * @throws java.io.IOException thrown 50% of the time
      */
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/fail50")
     @GET
-    String fail50();
+    String fail50() throws IOException ;
 
 }

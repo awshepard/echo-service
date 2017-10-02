@@ -1,6 +1,9 @@
 *.class
 .gradle
 build/
+echo-service.iml
+echo-service.ipr
+echo-service.iws
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
