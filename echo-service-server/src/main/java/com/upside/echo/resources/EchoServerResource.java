@@ -1,11 +1,12 @@
 package com.upside.echo.resources;
 
-import java.io.IOException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.ws.rs.ServiceUnavailableException;
 import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Random;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Echo server fun times.
@@ -26,14 +27,23 @@ public class EchoServerResource implements EchoResource {
     }
 
     @Override
-    public String fail50() throws IOException {
+    public String timeout50() throws InterruptedException {
+        if (this.random.nextFloat() < 0.5f) {
+            LOGGER.warn("Server sleeping for 10s");
+            Thread.sleep(10000);
+        }
+        LOGGER.info("Server returning 'hello'");
+        return "hello";
+    }
+
+    @Override
+    public String serviceUnavailable50() {
         if (this.random.nextFloat() < 0.5f) {
             LOGGER.warn("Server throwing random error");
-            throw new IOException("This is a randomly occuring error");
+            throw new ServiceUnavailableException("This is a randomly occuring error");
         }
-        else {
-            LOGGER.info("Server returning 'hello'");
-            return "hello";
-        }
+        LOGGER.info("Server returning 'hello'");
+        return "hello";
     }
+
 }
