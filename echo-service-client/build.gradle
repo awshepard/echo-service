@@ -1,0 +1,13 @@
+description = 'echo-service-client'
+dependencies {
+    compile project(':echo-service-api')
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310'
+    compile group: 'org.zalando', name: 'jackson-datatype-money'
+    compile group: 'com.upside.libs', name: 'lib-rest'
+    compile group: 'io.dropwizard', name: 'dropwizard-client'
+    compile group: 'org.slf4j', name: 'slf4j-api'
+
+    testCompile group: 'io.dropwizard', name: 'dropwizard-testing'
+}

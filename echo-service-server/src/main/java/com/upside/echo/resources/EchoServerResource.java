@@ -1,5 +1,10 @@
 package com.upside.echo.resources;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.ws.rs.ServiceUnavailableException;
+import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Random;
 
@@ -8,6 +13,7 @@ import java.util.Random;
  */
 public class EchoServerResource implements EchoResource {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private final Random random = new Random();
 
     @Override
@@ -17,16 +23,27 @@ public class EchoServerResource implements EchoResource {
 
     @Override
     public String getHello() {
-        return "good night booty";
+        return "hello";
     }
 
     @Override
-    public String fail50() {
+    public String timeout50() throws InterruptedException {
         if (this.random.nextFloat() < 0.5f) {
-            throw new IllegalStateException("This is a randomly occuring error");
+            LOGGER.warn("Server sleeping for 10s");
+            Thread.sleep(10000);
         }
-        else {
-            return "hello";
-        }
+        LOGGER.info("Server returning 'hello'");
+        return "hello";
     }
+
+    @Override
+    public String serviceUnavailable50() {
+        if (this.random.nextFloat() < 0.5f) {
+            LOGGER.warn("Server throwing random error");
+            throw new ServiceUnavailableException("This is a randomly occuring error");
+        }
+        LOGGER.info("Server returning 'hello'");
+        return "hello";
+    }
+
 }

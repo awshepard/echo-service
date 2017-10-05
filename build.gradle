@@ -5,7 +5,7 @@ apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/mas
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-jacoco-multimodule.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-dependency-management.gradle'
 
-defaultTasks 'snapshot', 'test', 'build', 'publishToMavenLocal', 'jacocoTestReport', 'jacocoRootReport'
+defaultTasks 'cleanIdea', 'idea', 'snapshot', 'test', 'build', 'publishToMavenLocal', 'jacocoTestReport', 'jacocoRootReport'
 
 allprojects {
     group = 'com.upside.echo'

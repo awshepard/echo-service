@@ -1,0 +1,11 @@
+
+description = 'echo-service-sentinel'
+dependencies {
+    compile project(':echo-service-server')
+    compile project(':echo-service-client')
+
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'io.dropwizard', name: 'dropwizard-testing'
+    testCompile group: 'com.upside.test.mysql', name: 'mysql-rule'
+    testCompile group: 'com.upside.libs', name: 'lib-rest'
+}

@@ -14,19 +14,31 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public interface EchoResource {
+
     @Path("/env")
     @GET
     Map<String, String> getEnv();
 
+    @Produces(MediaType.TEXT_PLAIN)
     @Path("/hello")
     @GET
     String getHello();
 
     /**
-     * @return says "hello" 50% of the time, throws a 500 InternalServerException the other 50% of the time
+     * @return says "hello" immediately 50% of the time, 50% of the time sleeps for 10 seconds before returning "hello"
+     * @throws InterruptedException if the thread is interrupted while sleeping
      */
-    @Path("/fail50")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/timeout50")
     @GET
-    String fail50();
+    String timeout50() throws InterruptedException;
+
+    /**
+     * @return says "hello" 50% of the time, returns a 503 Service Unavailable 50% of the time
+     */
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/serviceUnavailable50")
+    @GET
+    String serviceUnavailable50();
 
 }
