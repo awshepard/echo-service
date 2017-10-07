@@ -3,7 +3,7 @@ apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/mas
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-autovalue.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-jacoco.gradle'
 apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-jacoco-multimodule.gradle'
-apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/master/upside-dependency-management.gradle'
+apply from: 'https://raw.githubusercontent.com/upside-services/upside-gradle/dropwizard_1_2_0/upside-dependency-management.gradle'
 
 defaultTasks 'cleanIdea', 'idea', 'snapshot', 'test', 'build', 'publishToMavenLocal', 'jacocoTestReport', 'jacocoRootReport'
 
