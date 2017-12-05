@@ -1,7 +1,7 @@
 package com.upside.echo.v1.resources;
 
 import com.upside.echo.AbstractResourceIntegrationTest;
-import com.upside.echo.v1.client.JaxrsEchoClient;
+import com.upside.echo.v1.client.echo.JaxrsEchoClient;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;

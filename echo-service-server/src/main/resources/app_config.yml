@@ -5,3 +5,22 @@ server:
   adminConnectors:
     - type: http
       port: 6001
+#
+# Database configuration
+#
+database:
+  driverClass: com.mysql.jdbc.Driver
+  user: ${ECHO_DB_USER}
+  password: ${ECHO_DB_PASSWORD}
+  url: ${ECHO_DB_URL}
+  properties:
+    charSet: UTF-8
+  maxWaitForConnection: 1s
+  validationQuery: "/* EchoService Health Check */ SELECT 1"
+  validationQueryTimeout: 3s
+  initialSize: 2
+  minSize: 2
+  maxSize: 4
+  checkConnectionWhileIdle: true
+  evictionInterval: 10s
+  minIdleTime: 1 minute

@@ -1,4 +1,4 @@
-package com.upside.echo.v1.client;
+package com.upside.echo.v1.client.echo;
 
 import com.codahale.metrics.MetricRegistry;
 import com.fasterxml.jackson.databind.DeserializationFeature;

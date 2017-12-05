@@ -1,0 +1,20 @@
+description = 'echo-service-db'
+dependencies {
+    compile project(':echo-service-api')
+
+    compile group: 'com.google.guava', name: 'guava'
+    compile group: 'com.google.inject', name: 'guice'
+    compile group: 'com.upside.model', name: 'model-jdbi'
+    compile group: 'org.jdbi', name: 'jdbi'
+    compile group: 'org.slf4j', name: 'slf4j-api'
+
+    testCompile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
+    testCompile group: 'com.upside.test.mysql', name: 'mysql-rule'
+    testCompile group: 'io.dropwizard', name: 'dropwizard-core'
+    testCompile group: 'io.dropwizard', name: 'dropwizard-db'
+    testCompile group: 'io.dropwizard', name: 'dropwizard-jdbi'
+    testCompile group: 'io.dropwizard.metrics', name: 'metrics-core'
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'mysql', name: 'mysql-connector-java'
+    testCompile group: 'org.flywaydb', name: 'flyway-core'
+}

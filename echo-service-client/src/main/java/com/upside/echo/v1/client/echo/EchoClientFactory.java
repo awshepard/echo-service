@@ -1,4 +1,4 @@
-package com.upside.echo.v1.client;
+package com.upside.echo.v1.client.echo;
 
 import com.google.common.base.Preconditions;
 import com.upside.lib.rest.client.AbstractJaxrsMockSupportingClientFactory;
@@ -10,7 +10,7 @@ import java.util.concurrent.ForkJoinPool;
  * <p>Dropwizard-style factory to produce a EchoClient.</p>
  * <p>Example configuration in a Dropwizard YAML file:</p>
  * <pre>
-  attributeClient:
+  echoClient:
     baseUrl: ${ECHO_SERVICE_URL}
     username: ${ECHO_SERVICE_USER}
     password: ${ECHO_SERVICE_PASS}
