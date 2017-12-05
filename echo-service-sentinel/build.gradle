@@ -1,11 +1,13 @@
 
 description = 'echo-service-sentinel'
 dependencies {
-    compile project(':echo-service-server')
-    compile project(':echo-service-client')
+    testCompile project(':echo-service-server')
+    testCompile project(':echo-service-client')
 
-    testCompile group: 'junit', name: 'junit'
-    testCompile group: 'io.dropwizard', name: 'dropwizard-testing'
+    testCompile group: 'com.fasterxml.jackson.core', name: 'jackson-databind'
     testCompile group: 'com.upside.test.mysql', name: 'mysql-rule'
-    testCompile group: 'com.upside.libs', name: 'lib-rest'
+    testCompile group: 'io.dropwizard', name: 'dropwizard-testing'
+    testCompile group: 'javax.ws.rs', name: 'javax.ws.rs-api'
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'org.slf4j', name: 'slf4j-api'
 }

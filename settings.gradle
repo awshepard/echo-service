@@ -1,10 +1,12 @@
 rootProject.name = 'echo-service'
 include ':echo-service-api'
+include ':echo-service-db'
 include ':echo-service-client'
 include ':echo-service-sentinel'
 include ':echo-service-server'
 
 project(':echo-service-api').projectDir = "$rootDir/echo-service-api" as File
+project(':echo-service-db').projectDir = "$rootDir/echo-service-db" as File
 project(':echo-service-client').projectDir = "$rootDir/echo-service-client" as File
 project(':echo-service-sentinel').projectDir = "$rootDir/echo-service-sentinel" as File
 project(':echo-service-server').projectDir = "$rootDir/echo-service-server" as File

@@ -9,7 +9,7 @@ defaultTasks 'cleanIdea', 'idea', 'snapshot', 'test', 'build', 'publishToMavenLo
 
 allprojects {
     group = 'com.upside.echo'
-
+//    apply plugin: 'ca.cutterslade.analyze'
     test {
         testLogging {
             events "passed", "skipped", "failed"
@@ -20,6 +20,15 @@ allprojects {
         dependencies {
         }
     }
+}
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+  dependencies {
+    classpath 'ca.cutterslade.gradle:gradle-dependency-analyze:1.0.3'
+  }
 }
 
 
