@@ -1,6 +1,7 @@
 description = 'echo-service-api'
 dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations'
+    compile group: 'com.washingtonpost.dropwizard', name: 'dropwizard-peer-authenticator'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api'
 
     testCompile group: 'com.upside.libs', name: 'lib-test'
