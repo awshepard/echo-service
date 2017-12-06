@@ -24,3 +24,7 @@ database:
   checkConnectionWhileIdle: true
   evictionInterval: 10s
   minIdleTime: 1 minute
+
+allowedPeers:
+  credentialFile: allowed-peers.properties
+  encryptor: BASIC

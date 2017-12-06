@@ -37,3 +37,6 @@ database:
   checkConnectionWhileIdle: true
   evictionInterval: 10s
   minIdleTime: 1 minute
+
+allowedPeers:
+  credentialFile: test-peers.properties

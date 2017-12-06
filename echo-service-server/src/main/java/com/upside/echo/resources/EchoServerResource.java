@@ -1,6 +1,7 @@
 package com.upside.echo.resources;
 
 import com.upside.echo.service.EchoService;
+import com.washingtonpost.dw.auth.model.Peer;
 import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Random;
@@ -24,7 +25,7 @@ public class EchoServerResource implements EchoResource {
     }
 
     @Override
-    public Map<String, String> getEnv() {
+    public Map<String, String> getEnv(Peer peer) {
         return this.service.getEnv();
     }
 

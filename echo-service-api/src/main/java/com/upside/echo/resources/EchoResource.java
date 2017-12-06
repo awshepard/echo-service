@@ -1,5 +1,7 @@
 package com.upside.echo.resources;
 
+import com.washingtonpost.dw.auth.model.Peer;
+import io.dropwizard.auth.Auth;
 import java.util.Map;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -15,9 +17,13 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public interface EchoResource {
 
+    /**
+     * @param peer An authorized caller
+     * @return The service's environment
+     */
     @Path("/env")
     @GET
-    Map<String, String> getEnv();
+    Map<String, String> getEnv(@Auth Peer peer);
 
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/hello")

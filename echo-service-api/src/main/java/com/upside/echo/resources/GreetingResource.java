@@ -1,6 +1,8 @@
 package com.upside.echo.resources;
 
 import com.upside.echo.model.Greeting;
+import com.washingtonpost.dw.auth.model.Peer;
+import io.dropwizard.auth.Auth;
 import java.util.Collection;
 import java.util.UUID;
 import javax.ws.rs.Consumes;
@@ -19,18 +21,20 @@ import javax.ws.rs.core.MediaType;
 public interface GreetingResource {
 
     /**
+     * @param peer An authorized caller
      * @return all greetings in our database
      */
     @GET
-    Collection<Greeting> getGreetings();
+    Collection<Greeting> getGreetings(@Auth Peer peer);
 
     /**
      *
+     * @param peer An authorized caller
      * @param uuid the UUID of the greeting
      * @return A specific greeting from our database
      */
     @GET
     @Path("/{uuid}")
-    Greeting getGreeting(@PathParam("uuid") UUID uuid);
+    Greeting getGreeting(@Auth Peer peer, @PathParam("uuid") UUID uuid);
 
 }

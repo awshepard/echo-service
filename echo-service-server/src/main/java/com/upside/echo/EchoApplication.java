@@ -62,6 +62,8 @@ public class EchoApplication extends Application<EchoConfiguration> {
     public void run(EchoConfiguration configuration, Environment environment) {
         migrateDatabase(configuration.getDatabase());
 
+        configuration.getAllowedPeers().registerAuthenticator(environment);
+
         // Force the DBI to be instantiated now in order to allow the ManagedDataSource to be attached to the lifecycle
         // through {@code io.dropwizard.lifecycle.setup.LifecycleEnvironment#attach()}, which is only called at
         // startup. If we don't do this here, the DBI won't be instantiated until an endpoint is called, and
