@@ -1,12 +1,13 @@
 package com.upside.echo.resources;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.ws.rs.ServiceUnavailableException;
+import com.upside.echo.service.EchoService;
 import java.lang.invoke.MethodHandles;
 import java.util.Map;
 import java.util.Random;
+import javax.inject.Inject;
+import javax.ws.rs.ServiceUnavailableException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Echo server fun times.
@@ -15,10 +16,16 @@ public class EchoServerResource implements EchoResource {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
     private final Random random = new Random();
+    private final EchoService service;
+
+    @Inject
+    public EchoServerResource(EchoService echoService) {
+        this.service = echoService;
+    }
 
     @Override
     public Map<String, String> getEnv() {
-        return System.getenv();
+        return this.service.getEnv();
     }
 
     @Override

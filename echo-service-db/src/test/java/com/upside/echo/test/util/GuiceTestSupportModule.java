@@ -6,7 +6,9 @@ import com.google.common.base.Preconditions;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.upside.echo.dao.GreetingDAO;
+import com.upside.echo.service.DefaultEchoService;
 import com.upside.echo.service.DefaultGreetingService;
+import com.upside.echo.service.EchoService;
 import com.upside.echo.service.GreetingService;
 import java.util.UUID;
 import java.util.function.Supplier;
@@ -61,6 +63,7 @@ public class GuiceTestSupportModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(GreetingService.class).to(DefaultGreetingService.class);
+        bind(EchoService.class).to(DefaultEchoService.class);
     }
 
     @Provides
