@@ -7,7 +7,9 @@ import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.Singleton;
 import com.upside.echo.dao.GreetingDAO;
+import com.upside.echo.service.DefaultEchoService;
 import com.upside.echo.service.DefaultGreetingService;
+import com.upside.echo.service.EchoService;
 import com.upside.echo.service.GreetingService;
 import com.upside.model.jdbi.argument.UUIDArgumentFactory;
 import io.dropwizard.jdbi.DBIFactory;
@@ -34,6 +36,7 @@ class EchoServiceModule implements Module  {
 
     @Override
     public void configure(Binder binder) {
+        binder.bind(EchoService.class).to(DefaultEchoService.class).asEagerSingleton();
         binder.bind(GreetingService.class).to(DefaultGreetingService.class).asEagerSingleton();
     }
 
