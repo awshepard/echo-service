@@ -13,11 +13,13 @@ public class DefaultEchoService implements EchoService {
      */
     @Override
     public Map<String, String> getEnv() {
-        Map<String, String> env = System.getenv();
-        env.keySet().stream().filter((key) -> (key.startsWith("ECHO_DB"))).forEachOrdered((key) -> {
-            env.remove(key);
+        ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
+        System.getenv().forEach((k, v) -> {
+            if (! k.startsWith("ECHO_DB")) {
+                builder.put(k, v);
+            }
         });
-        return ImmutableMap.copyOf(env);
+        return builder.build();
     }
 
 }
