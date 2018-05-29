@@ -28,3 +28,13 @@ database:
 allowedPeers:
   credentialFile: allowed-peers.properties
   encryptor: BASIC
+
+metrics:
+  frequency: 1 minute
+  reporters:
+    - type: datadog
+      transport:
+        type: udp
+        prefix: local-echo
+        statsdHost: "localhost"
+        port: 8125

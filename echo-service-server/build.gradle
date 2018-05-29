@@ -22,6 +22,7 @@ dependencies {
     compile group: 'javax.validation', name: 'validation-api'
     compile group: 'javax.ws.rs', name: 'javax.ws.rs-api'
     compile group: 'mysql', name: 'mysql-connector-java'
+    compile group: 'org.coursera', name: 'dropwizard-metrics-datadog'
     compile group: 'org.flywaydb', name: 'flyway-core'
     compile group: 'org.jdbi', name: 'jdbi'
     compile group: 'org.slf4j', name: 'slf4j-api'
