@@ -35,6 +35,5 @@ metrics:
     - type: datadog
       transport:
         type: udp
-        prefix: local-echo
         statsdHost: "localhost"
         port: 8125
