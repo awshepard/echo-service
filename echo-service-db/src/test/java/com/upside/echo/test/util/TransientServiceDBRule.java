@@ -9,28 +9,21 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Environment;
+import java.util.List;
 import org.flywaydb.core.Flyway;
 import org.junit.rules.ExternalResource;
 import org.skife.jdbi.v2.DBI;
 import org.skife.jdbi.v2.Handle;
-
-import java.util.List;
 
 /**
  * Test rule to setup and teardown a database for testing.
  */
 public class TransientServiceDBRule extends ExternalResource {
 
-    private DBI dbi;
     private final List<String> tables;
-
-    public DBI getDbi() {
-        return this.dbi;
-    }
-
-    private ManagedDataSource dataSource;
-
     private final MySQLRule mySQLRule;
+    private ManagedDataSource dataSource;
+    private DBI dbi;
 
     public TransientServiceDBRule(MySQLRule rule, String ... tables) {
         this.mySQLRule = rule;
@@ -39,6 +32,10 @@ public class TransientServiceDBRule extends ExternalResource {
 
     public MySQLRule getMySQLRule() {
         return this.mySQLRule;
+    }
+
+    public DBI getDbi() {
+        return this.dbi;
     }
 
     @Override
@@ -53,6 +50,7 @@ public class TransientServiceDBRule extends ExternalResource {
         dataSourceFactory.setUrl(this.mySQLRule.getDbUrl());
         dataSourceFactory.setUser(this.mySQLRule.getDbUser());
         dataSourceFactory.setPassword(this.mySQLRule.getDbPassword());
+        dataSourceFactory.setDriverClass(MySQLRule.DRIVER_CLASSNAME);
         this.dataSource = dataSourceFactory.build(new MetricRegistry(), "test");
         this.dbi = new DBIFactory().build(environment, dataSourceFactory, this.dataSource, "test");
         this.dbi.registerArgumentFactory(new UUIDArgumentFactory());
