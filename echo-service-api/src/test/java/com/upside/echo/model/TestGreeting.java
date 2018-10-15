@@ -2,9 +2,6 @@ package com.upside.echo.model;
 
 import com.upside.test.model.AbstractModelTest;
 import java.util.UUID;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import nl.jqno.equalsverifier.Warning;
-import org.junit.Test;
 
 /**
  * <p>Tests our greeting POJO</p>
@@ -23,19 +20,4 @@ public class TestGreeting extends AbstractModelTest<Greeting> {
             .greeting("Hello world")
             .build();
     }
-
-    @Override
-    protected Class<Greeting> getExpectedEntityType() {
-        return Greeting.class;
-    }
-
-    @Test
-    public void testEqualsAndHashCode() {
-        EqualsVerifier.forClass(AutoValue_Greeting.class)
-                .suppress(Warning.STRICT_INHERITANCE,
-                          Warning.NONFINAL_FIELDS,
-                          Warning.NULL_FIELDS)
-                .verify();
-    }
-
 }
