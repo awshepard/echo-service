@@ -10,8 +10,7 @@ public class EchoServiceHealthCheck extends NamedHealthCheck {
 
     @Override
     protected HealthCheck.Result check() throws Exception {
-        // FIXME replace with something more meaningful as a test of our health (e.g. db connectivity?)
-        return HealthCheck.Result.healthy();
+        return HealthCheck.Result.unhealthy("this is a test of an unhealthy echo-service");
     }
 
     @Override
