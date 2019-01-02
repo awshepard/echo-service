@@ -10,7 +10,7 @@ public class EchoServiceHealthCheck extends NamedHealthCheck {
 
     @Override
     protected HealthCheck.Result check() throws Exception {
-        return HealthCheck.Result.unhealthy("this is a test of an unhealthy echo-service");
+        return HealthCheck.Result.healthy();
     }
 
     @Override
