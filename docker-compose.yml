@@ -4,9 +4,9 @@ echo-service:
         - echo-service-mysql
     ports: 
         # REST service port 
-         - "6000:6000"
+         - "9000:9000"
         # Dropwizard administration port
-         - "6001:6001"
+         - "9001:9001"
     environment:
         ECHO_DB_URL: jdbc:mysql://echo-service-mysql:3306/echo
         ECHO_DB_USER: echo
