@@ -3,10 +3,10 @@ server:
     bufferSize: 8KiB
   applicationConnectors:
     - type: http
-      port: 9000
+      port: 6000
   adminConnectors:
     - type: http
-      port: 9001
+      port: 6001
 
 
 # Logging settings.

@@ -10,7 +10,7 @@ Demonstrates:
 * -sentinel testing pattern
 * JAXRS Client Factories
 * BasicAuth / Dropwizard-Peer authenticators
-* Healthcheck on admin port :9001
+* Healthcheck on admin port :6001
 * The "resource layer <-> service layer <-> dao layer" pattern
 
 ## Compile
@@ -26,11 +26,11 @@ docker-compose build && docker-compose up
 # just wait until the DB appears to be done bootstrapping, then "Ctrl+C" and try "docker-compose up" again
 ```
 
-The echo service should come up on port :9000, which you should be able to hit in a 2nd terminal like:
+The echo service should come up on port :6000, which you should be able to hit in a 2nd terminal like:
 ```
 eval "$(docker-machine env default)"
 
-curl http://docker:9000/echo/hello
+curl http://docker:6000/echo/hello
 
 hello
 ```
