@@ -1,5 +1,8 @@
 *.class
 .gradle
+.idea/
+*.iml
+target/
 build/
 echo-service.iml
 echo-service.ipr
