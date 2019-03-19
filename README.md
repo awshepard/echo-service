@@ -13,24 +13,41 @@ Demonstrates:
 * Healthcheck on admin port :6001
 * The "resource layer <-> service layer <-> dao layer" pattern
 
-## Compile
-`./gradlew clean snapshot build jacocoTestReport jacocoRootReport publishToMavenLocal`
+## Compiling
+* `mci` (aka `mvn clean install`) will run all unit and integration tests and install JARs in your local mvn repository
 
-## Run locally
+Compiling with test coverage is included in the `mci` alias and will produce reports in:
+
+FIXME UP-3299 - come up with a jacoco-combining configuration in upside-parent-pom instead of this
+
+`open */target/site/jacoco-combined/index.html`
+
+## Docker
+To create a docker image, activate the `shade` and `docker` plugins:
+* `mci -Pshade,docker`
+
+To push the docker image to our AWS ECR repository run:
+* `$(aws ecr get-login --no-include-email --region us-east-1)`   # log in to our AWS ECR repo for 12 hours
+* `mvn deploy -Pshade,docker`
+
+Run this service with docker on your localhost like:
 ```
-docker-machine restart default
+mci -Pshade
+cd echo-service-server
+export ALPHA_ECHO_SERVICE_AWS_ACCESS=<the AWS access code for the ECHO_SERVICE user>
+export ALPHA_ECHO_SERVICE_AWS_SECRET=<the AWS secret for the ECHO_SERVICE user>
 docker-compose build && docker-compose up
 
-# note the first time you run "docker-compose up" the app might "beat" the mysql image in terms of coming up first, so the
-# app will die because it can't connect to the DB (which is still bootstrapping itself the first time).  If this happens,
-# just wait until the DB appears to be done bootstrapping, then "Ctrl+C" and try "docker-compose up" again
+# NOTE: the very first time you bring docker up, the server image might "beat" the mysql image and not be able to connect to the mysql image because it's still boostrapping.
+#      Once mysql is up, "Ctrl+C" the docker compose process and run docker-compose up again
 ```
 
-The echo service should come up on port :6000, which you should be able to hit in a 2nd terminal like:
+Once docker is up and running, the server is accessible at http://docker:11000 with a required username and password, like:
 ```
-eval "$(docker-machine env default)"
+export server="http://docker:7004"
+export ct="Content-Type: application/json"
+export auth="xxx get from secured source xxx"
 
-curl http://docker:6000/echo/hello
-
-hello
+curl  $server/echo/hello 
 ```
+

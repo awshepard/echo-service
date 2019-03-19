@@ -15,7 +15,7 @@ public class DefaultEchoService implements EchoService {
     public Map<String, String> getEnv() {
         ImmutableMap.Builder<String, String> builder = ImmutableMap.builder();
         System.getenv().forEach((k, v) -> {
-            if (! k.startsWith("ECHO_DB")) {
+            if (!k.startsWith("ECHO_DB")) {
                 builder.put(k, v);
             }
         });

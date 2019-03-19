@@ -5,7 +5,7 @@ WORKDIR /usr/service
 ADD echo-service-server/build/distributions/echo-service-server.zip /usr/service/
 RUN ["unzip", "/usr/service/echo-service-server.zip"]
 RUN ["rm", "/usr/service/echo-service-server.zip"]
-ADD echo-service-server/src/main/resources/app_config.yml /usr/service/
+ADD src/main/resources/app_config.yml /usr/service/
 
 
 # Create a non-root user to run the server
