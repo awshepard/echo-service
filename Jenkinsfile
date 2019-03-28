@@ -141,7 +141,7 @@ spec:
                             updatedVersion = "v${parsedVersion.major}.${parsedVersion.minor}.${parsedVersion.patch + 1}"
                             break
                         case "Snapshot":
-                            updatedVersion = "v${parsedVersion.major}.${parsedVersion.minor}.${parsedVersion.patch}-${currentSha}-SNAPSHOT"
+                            updatedVersion = "v${parsedVersion.major}.${parsedVersion.minor}.${parsedVersion.patch}-SNAPSHOT-${currentSha}"
                             break
                     }
 
