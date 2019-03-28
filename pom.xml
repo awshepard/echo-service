@@ -23,6 +23,7 @@
     </scm>
 
     <properties>
+        <useSystemClassLoader>false</useSystemClassLoader>
     </properties>
 
     <modules>
