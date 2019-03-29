@@ -6,7 +6,7 @@ def IMAGE_NAME = "services/echo"
 def DOCKER_BUILD_DIRECTORY = "${SERVICE}-server"
 def DOCKERFILE = "./${SERVICE}-server/Dockerfile"
 def DOCKER_REGISTRY = "337068080576.dkr.ecr.us-east-1.amazonaws.com"
-def DOCKER_CREDENTIAL_ID = "AWS Jenkins"
+def DOCKER_CREDENTIAL_ID = "AWS"
 
 def parseVersion(String version) {
     def FORMAT = "v(\\d+)\\.(\\d+)(?:\\.)?(\\d*)(\\.|-|\\+)?([0-9A-Za-z-.]*)?"
@@ -27,8 +27,6 @@ def parseVersion(String version) {
             "patch": patch
     ]
 }
-
-
 
 properties([
         parameters([
@@ -67,7 +65,7 @@ BUILD_VERSION=""
 
 pipeline {
     environment {
-        ARTIFACTORY = credentials('ee31cd4e-7354-4387-830b-fea3c9e69e9c')
+        ARTIFACTORY = credentials('Artifactory')
     }
 
     agent {
