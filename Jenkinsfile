@@ -152,7 +152,6 @@ spec:
         stage('build and test') {
             steps {
                 container('maven-builder') {
-                    echo "taco"
                     sh("""
                         sed "s/\\[ARTIFACTORY_USER\\]/$ARTIFACTORY_USR/g" /jenkins/settings.xml | sed "s/\\[ARTIFACTORY_PASSWORD\\]/$ARTIFACTORY_PSW/g" > jenkins-settings.xml
                     """)
@@ -202,6 +201,32 @@ spec:
                         }
 
                     }
+                }
+            }
+        }
+        
+        stage('clean up old ECR images') {
+            when {
+                expression {
+                    return params.version != "Snapshot" || params.override != ""
+                }
+            }
+            steps {
+                script {
+                    echo "To Do!"
+                }
+            }
+        }
+        
+        stage('clean up old artifactory artifacts') {
+            when {
+                expression {
+                    return params.version != "Snapshot" || params.override != ""
+                }
+            }
+            steps {
+                script {
+                    echo "To Do!"
                 }
             }
         }
