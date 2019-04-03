@@ -1,4 +1,4 @@
-FROM java:8-jre-alpine
+FROM openjdk:8-jre-alpine
 
 RUN apk upgrade && \
     apk update
@@ -11,14 +11,9 @@ WORKDIR /usr/service
 ARG SERVICE_JAR=echo-service-server.jar
 ADD target/${SERVICE_JAR} /usr/service/echo-service-server.jar
 ADD src/main/resources/app_config.yml /usr/service/
+ADD scripts/run-server.sh /usr/service/run-server.sh
 
 EXPOSE 7004 7005
 
-# Environment variables that are needed for local dev with docker-compose
-ENV DATADOG_FREQUENCY="1 minute"
-ENV DATADOG_HOST="localhost"
-ENV DATADOG_PORT="8125"
-ENV DATADOG_TAGS='"tier:local", "service:echo"'
-
 USER notroot
-CMD ["/usr/bin/java", "-jar", "echo-service-server.jar", "server", "app_config.yml"]
+CMD ["/usr/service/run-server.sh"]

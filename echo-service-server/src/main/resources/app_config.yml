@@ -30,10 +30,13 @@ allowedPeers:
   encryptor: BASIC
 
 metrics:
-  frequency: 1 minute
+  frequency: ${DATADOG_FREQUENCY:-1 minute}
   reporters:
     - type: datadog
+      tags: [${DATADOG_TAGS:-""}]
       transport:
         type: udp
-        statsdHost: "localhost"
-        port: 8125
+        statsdHost: ${DATADOG_HOST:-localhost}
+        port: ${DATADOG_PORT:-8125}
+        prefix: ${DATADOG_PREFIX:-""}
+        retryingLookup: true

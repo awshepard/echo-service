@@ -84,7 +84,7 @@ spec:
     - cat
     tty: true
   - name: docker
-    image: docker:1.11
+    image: docker:latest
     command: 
     - cat
     tty: true
@@ -163,7 +163,13 @@ spec:
         stage('publish JARs') {
             steps {
                 script {
-                    echo "To Do!"
+                    container('maven-builder') {
+                        if (params.version != "Snapshot") {
+                            sh "mvn --settings jenkins-settings.xml deploy scm:tag -Drevision=${BUILD_VERSION} -Dtag=v${BUILD_VERSION} -DpushChanges=false"
+                        } else {
+                            sh "mvn --settings jenkins-settings.xml deploy -Drevision=v${BUILD_VERSION}"
+                        }
+                    }
                 }
             }
         }
@@ -184,7 +190,11 @@ spec:
             }
             steps {
                 script {
-                    echo "To Do!"
+                    if (params.version != "Snapshot") {
+                        sh "git config user.name 'Jenkins Pipeline'"
+                        sh "git config user.email 'jenkins@upside-services.com'"
+                        sh "git push origin v${BUILD_VERSION}"
+                    }
                 }
             }
         }
@@ -194,7 +204,7 @@ spec:
                 script {
                     container('docker') {
                         docker.withRegistry("https://${DOCKER_REGISTRY}", "ecr:us-east-1:${DOCKER_CREDENTIAL_ID}") {
-                            def image = docker.build("${DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_VERSION}", " -f ${DOCKERFILE} ${WORKSPACE}/${DOCKER_BUILD_DIRECTORY}")
+                            def image = docker.build("${DOCKER_REGISTRY}/${IMAGE_NAME}:${BUILD_VERSION}", " --network=host -f ${DOCKERFILE} ${WORKSPACE}/${DOCKER_BUILD_DIRECTORY}")
                             echo "image created ${image.id}"
                             //push the image
                             image.push()
