@@ -12,7 +12,7 @@
     <groupId>com.upside.echo</groupId>
     <packaging>pom</packaging>
     <artifactId>echo-service</artifactId>
-    <version>0.19.0-SNAPSHOT</version>
+    <version>${revision}</version>
 
     <name>echo-service</name>
     <description>echo-service</description>
@@ -24,6 +24,8 @@
 
     <properties>
         <useSystemClassLoader>false</useSystemClassLoader>
+        <!-- Sane default when no revision property is passed in from the commandline -->
+        <revision>local-SNAPSHOT</revision>
     </properties>
 
     <modules>
@@ -35,6 +37,15 @@
     </modules>
 
     <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-scm-plugin</artifactId>
+                <version>1.9.4</version>
+                <configuration>
+                    <tag>v${project.version}</tag>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencyManagement>
