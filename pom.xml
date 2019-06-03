@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.upside</groupId>
         <artifactId>upside-service-pom</artifactId>
-        <version>1.7.0</version>
+        <version>1.8.0</version>
     </parent>
 
     <groupId>com.upside.echo</groupId>
@@ -40,10 +40,10 @@
         <plugins>
             <plugin>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.9.4</version>
-                <configuration>
-                    <tag>v${project.version}</tag>
-                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
