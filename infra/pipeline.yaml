@@ -1,4 +1,6 @@
 service:
-    name: echo
+  name: echo
+  autoDeployToAlpha: true
 serviceRelease:
-    pythonClient: false
+  pythonClient: false
+
