@@ -3,4 +3,3 @@ service:
   autoDeployToAlpha: true
 serviceRelease:
   pythonClient: false
-
