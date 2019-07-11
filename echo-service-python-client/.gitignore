@@ -1,0 +1,10 @@
+env/
+build/
+.idea/
+.cache/
+.coverage
+.coverage/
+coverage.xml
+.tox/
+*egg-info*/
+dist/
