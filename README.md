@@ -13,9 +13,21 @@ Demonstrates:
 * Healthcheck on admin port :6001
 * The "resource layer <-> service layer <-> dao layer" pattern
 
-## Compiling
+## Development
+First, make sure your localhost is setup per [Upside standards](https://upside-services.atlassian.net/wiki/spaces/ENG/pages/9568257/Setting+Up+a+Localhost)
 
+### Compiling
 See the [General Purpose Dropwizard Development Instructions](https://upside-services.atlassian.net/wiki/spaces/ENG/pages/65929227/General+Purpose+Dropwizard+Development+Instructions) for compiling, testing, dockerizing instructions
+
+### Releasing
+
+To deploy the released version to AWS follow the [releasing instructions](https://upside-services.atlassian.net/wiki/spaces/ENG/pages/61505543/How+to+Release+Maven+services) for Java microservices.
+
+### Deploying
+
+We'll deploy this service to our Kubernetes cluster(s) in AWS
+
+Like all our Dropwizard services, we will release this artifact using our [deploying instructions](https://upside-services.atlassian.net/wiki/spaces/ENG/pages/30539966/Deploying+Microservices).
 
 ## Docker Example
 Run this service with docker on your localhost like:
