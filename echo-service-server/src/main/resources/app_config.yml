@@ -34,6 +34,15 @@ metrics:
   reporters:
     - type: datadog
       tags: [${DATADOG_TAGS:-""}]
+      excludes:
+        - ch.qos.logback
+        - io.dropwizard.jetty.MutableServletContextHandler
+        - org.eclipse.jetty.util.thread.QueuedThreadPool
+        - io.dropwizard.jetty.MutableServletContextHandler
+        - org.skife.jdbi.v2.DBI.raw_sql
+        - io.dropwizard.db.ManagedPooledDataSource
+        - sql.raw
+      useRegexFilters: true
       transport:
         type: udp
         statsdHost: ${DATADOG_HOST:-localhost}
